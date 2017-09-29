@@ -1,0 +1,4 @@
+rootProject.name = 'spring_security'
+include 'xmlconfig'
+include 'javaconfig'
+
