@@ -5,10 +5,22 @@
          xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 						http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 
-    <http />
+    <http pattern="/api/**">
+        <intercept-url pattern="/api/**" access="authenticated" />
+        <http-basic />
+    </http>
+
+    <http>
+        <intercept-url pattern="/secure/admin/**" access="hasRole('ADMIN')" />
+        <intercept-url pattern="/secure/**" access="authenticated" />
+        <form-login />
+        <http-basic />
+        <logout />
+    </http>
 
     <user-service>
         <user name="user" password="password" authorities="ROLE_USER" />
+        <user name="admin" password="password" authorities="ROLE_ADMIN" />
     </user-service>
 
 </b:beans>
